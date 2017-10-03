@@ -45,6 +45,8 @@ var passport = require('./config/ppConfig');
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(req, res) {
   res.render('index');
 });
