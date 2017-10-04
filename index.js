@@ -13,6 +13,11 @@ app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 
+//Link /public to index and controllers
+app.use(express.static(__dirname + '/public'));
+app.use('/auth', express.static(__dirname + '/public'));
+app.use('/profile', express.static(__dirname + '/public'));
+
 /*
  * setup the session with the following:
  * 
