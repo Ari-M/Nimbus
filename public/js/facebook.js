@@ -1,17 +1,13 @@
 
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1480103738725569',
+      appId      : '{your-app-id}',
       cookie     : true,
       xfbml      : true,
-      version    : 'v2.10'
-
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
+      version    : '{latest-api-version}'
     });
-  });
-  //   FB.AppEvents.logPageView();   
-  // };
+    FB.AppEvents.logPageView();   
+  };
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
@@ -20,11 +16,3 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-
-  function statusChangeCallback (response) {
-    if (response.status === 'connected') {
-      console.log('Facebook is now connnected')
-    } else {
-      console.log('Facebook connection failure')
-    }
-  }

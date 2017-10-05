@@ -1,3 +1,77 @@
 <%- include partials/profile %>
 
 <h3>This is the facebook page</h3>
+
+	<div id='login-buttons'>
+		<fb:login-button
+		  id='fb-login' 
+		  scope="public_profile,email,user_birthday,user_location,publish_actions"
+		  onlogin="checkLoginState();">
+		</fb:login-button>
+	</div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1480103738725569',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+
+	FB.getLoginStatus(function(response) {
+	    statusChangeCallback(response);
+	});   
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function statusChangeCallback(response) {
+  	if(response.status === 'connected') {
+  		console.log("Facebook has connected and authenticated!")
+  		grabAPI();
+  	} else {
+  		console.log("Facebook has not connected: ", response.status);
+  	}
+  }
+
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+function grabAPI() {
+	FB.api('me?fields=name,id,birthday,location,email', function(response) {
+		if(response && !response.error) {
+			//console.log(response);
+			renderProfile(response);
+		} else {
+			console.log(response.error)
+		}
+	})
+}
+
+function renderProfile(user) {
+	$('#welcome-greeting').text('Welcome, ' + user.name +'!');
+	let profile = `
+
+	`;
+}
+
+function logout() {
+	FB.api.logout;
+}
+
+</script>
+
+
+

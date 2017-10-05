@@ -1,13 +1,28 @@
+html, body {
+  min-width: 992px;
+}
+
 #welcome-greeting {
   text-align: right;
 }
 
+
 /*   THIS IS FOR THE PROFILE PAGE.   */
+#login-buttons {
+ display: block;
+ padding-top: 10px;
+}
+
+#fb-login {
+  display:;
+}
+
 #services-menu {
   text-align: right;
   background-color: green;
   padding: 5px;
   width: 100%;
+  display: inline-block;
 }
 
 .spot {
