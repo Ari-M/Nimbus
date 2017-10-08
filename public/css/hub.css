@@ -1,4 +1,4 @@
-html, body {
+html,body {
   min-width: 992px;
 }
 
@@ -6,8 +6,17 @@ html, body {
   text-align: right;
 }
 
+.no-bullet {
+  list-style-type: none;
+}
 
-/*   THIS IS FOR THE PROFILE PAGE.   */
+/*. FOR DASHBOARD PAGE */
+.inline {
+  display: inline-block;
+}
+
+/* FOR FACEBOOK PAGE  */
+
 #login-buttons {
  display: block;
  padding-top: 10px;
@@ -16,6 +25,18 @@ html, body {
 #fb-login {
   display:;
 }
+
+/* FOR TWITTER PAGE  */
+
+
+
+.tweet-container {
+  border: 2px black solid;
+  margin-top: 5px;
+}
+
+/*   THIS IS FOR THE PROFILE PAGE.   */
+
 
 #services-menu {
   text-align: right;

@@ -1,3 +1,14 @@
 <%- include partials/profile %>
 
-<h3>This is the twitter page</h3>
+<div id='twitter-home-feed'>
+<h3>Twitter Home Feed</h3>
+<% tweets.forEach (function(tweets) { %>
+		<li class=no-bullet>
+			<div class='tweet-container'> 
+				<%= tweets.text %> - <strong> <%= tweets.user.name %> (@<%= tweets.user.screen_name %>)</strong>
+			</div>
+		</li>
+
+<% }) %>
+</div>
+
