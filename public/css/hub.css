@@ -1,6 +1,28 @@
 html,body {
   min-width: 992px;
 }
+ #container {
+  width: 90%;
+  height: 100%;
+ }
+/* THIS IS CUSTOMIZABLE CSS FOR PREFERENCES TABLE */
+.background-customize {
+
+}
+
+#twitter-page {
+
+}
+
+#facebook-page {
+
+}
+
+#dashboard-page {
+
+}
+
+/* END PREFERENCES CSS */
 
 #welcome-greeting {
   text-align: right;
