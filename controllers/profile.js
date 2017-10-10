@@ -17,12 +17,12 @@ router.get('/', isLoggedIn, function(req, res) {
 	db.preference.findOne({
 		where: {userId: req.user.id}
 	}).then(function(preference) {
-		console.log(user)
+		console.log(preference)
 		res.render('dashboard', {preference: preference})
 	})
 })
 
-router.post('/dashboard', isLoggedIn, function(req, res) {
+router.post('/', isLoggedIn, function(req, res) {
 	var email = req.user.email;
 	var navColor = req.body.navColor;
 	console.log(navColor);
@@ -33,11 +33,13 @@ router.post('/dashboard', isLoggedIn, function(req, res) {
 		db.preference.findOrCreate({
 			where: {userId: req.user.id}
 		}).spread(function(preference, created){
-			author.createPreference({
+			db.preference.update({
 				navColor: navColor
+			}, {
+				where: {userId: req.user.id}
 			}).then(function(preference) {
 				console.log(preference);
-				res.redirect('/');  
+				res.redirect('/profile');  
 			})
 		})
 	})
@@ -45,11 +47,16 @@ router.post('/dashboard', isLoggedIn, function(req, res) {
 })
 
 router.get('/facebook', isLoggedIn, function(req, res) {
-	res.render('facebook');
+	db.preference.findOne({
+		where: {userId: req.user.id}
+	}).then(function(preference) {
+		console.log(preference)
+		res.render('facebook', {preference: preference})
+	})
 })
 
 router.get('/twitter', isLoggedIn, function(req, res) {
-	twitter.get('statuses/home_timeline', {screen_name: 'nodejs', count: 6}, function(error, tweets, response) {
+	twitter.get('statuses/home_timeline', {screen_name: 'nodejs', count: 10}, function(error, tweets, response) {
 		if(!error) {
 			//res.render('twitter', {title: 'Express', tweets: tweets});
 			db.user.findOne({

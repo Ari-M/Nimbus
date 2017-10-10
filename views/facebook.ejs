@@ -1,6 +1,6 @@
 <%- include partials/profile %>
 
-<h3>This is the facebook page</h3>
+<h3>Facebook Feed</h3>
 
 	<div id='login-buttons'>
 		<fb:login-button
@@ -10,6 +10,7 @@
 		</fb:login-button>
 	</div>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -53,23 +54,34 @@ function grabAPI() {
 	FB.api('me?fields=name,id,birthday,location,email', function(response) {
 		if(response && !response.error) {
 			//console.log(response);
-			renderProfile(response);
+			//renderProfile(response);
 		} else {
 			console.log(response.error)
 		}
 	})
 }
 
-function renderProfile(user) {
-	$('#welcome-greeting').text('Welcome, ' + user.name +'!');
-	let profile = `
+// function renderProfile(user) {
+// 	$('#welcome-greeting').text('Welcome, ' + user.name +'!');
+// 	let profile = `
 
-	`;
-}
+// 	`;
+// }
 
 function logout() {
 	FB.api.logout;
 }
+
+//FOR CUSTOMIZATION
+
+  var navBar = $('#services-menu');
+
+  var navColor = '<%=preference.dataValues.navColor%>'; 
+  if (navColor) {
+    $(navBar).css('backgroundColor', navColor);
+  } else {
+    //Do Nothing
+  }
 
 </script>
 

@@ -6,12 +6,12 @@
 	<a href="">Peach</a>
 	<a href="">Grey</a>
 	<a href="">Purple</a> -->
-	<form method='POST' action='/profile/dashboard/'>
+	<form method='POST' action='/profile/'>
 		<input type='radio' id='nav-peach' name='navColor' value='#ffa577'>
 		<label for='nav-peach'>Peach</label>
 		<input type='radio' id='nav-grey' name='navColor' value='#c4c4c4'>
 		<label for='nav-grey'>Grey</label>
-		<input type='radio' id='nav-purple' name='navColor' valuel='#663399'>
+		<input type='radio' id='nav-purple' name='navColor' value='#663399'>
 		<label for='nav-purple'>Purple</label> <br>
 		<button type='Submit'>Save</button>
 	</form>
@@ -22,7 +22,6 @@
 <script>
 	console.log(<% preference %>);
 	var navBar = $('#services-menu');
-	var dashboardPage = $('#dashboard-page');
 
 	var navColor = '<%=preference.dataValues.navColor%>';	
 	if (navColor) {
