@@ -73,10 +73,15 @@ function logout() {
 }
 
 //FOR CUSTOMIZATION
-
+console.log(<% preference %>);
   var navBar = $('#services-menu');
+  var twitterPage = $('#twitter-page');
 
-  var navColor = '<%=preference.dataValues.navColor%>'; 
+  if('<%=preference.dataValues.navColor%>') {
+    var navColor = '<%=preference.dataValues.navColor %>'
+  } else {
+    $(navBar).css('backgroundColor', 'black');
+  }
   if (navColor) {
     $(navBar).css('backgroundColor', navColor);
   } else {

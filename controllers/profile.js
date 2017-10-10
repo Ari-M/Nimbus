@@ -60,7 +60,7 @@ router.get('/twitter', isLoggedIn, function(req, res) {
 		if(!error) {
 			//res.render('twitter', {title: 'Express', tweets: tweets});
 			db.user.findOne({
-				where: {id: req.user.id}
+				where: {email: req.user.email}
 			}).then(function(user) {
 				db.preference.findOrCreate({
 					where: {userId: req.user.id}
