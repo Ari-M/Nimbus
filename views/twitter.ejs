@@ -1,6 +1,7 @@
 <%- include partials/profile %>
 <div id='twitter-page' class='background-customize'>
 	<div id='twitter-home-feed'>
+		<h3> <%=user.email %> </h3>
 	<h3>Twitter Home Feed</h3>
 	<% tweets.forEach (function(tweets) { %>
 			<li class=no-bullet>
@@ -12,4 +13,23 @@
 	<% }) %>
 	</div>
 </div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+	console.log(<% preference %>);
+	var navBar = $('#services-menu');
+	var twitterPage = $('#twitter-page');
+
+	//var twitterColor = preference.dataValues.twitterColor
+	var navColor = '<%=preference.dataValues.navColor%>'
+	var twitterColor = '<%=preference.dataValues.twitterColor%>'
+	
+	if (navColor || ) {
+		$(navBar).css('backgroundColor', navColor);
+		$(twitterPage).css('backgroundColor', twitterColor)
+	} else {
+		//Do Nothing
+	}
+
+</script>
 

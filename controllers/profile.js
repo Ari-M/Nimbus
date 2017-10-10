@@ -22,10 +22,21 @@ router.get('/facebook', isLoggedIn, function(req, res) {
 })
 
 router.get('/twitter', isLoggedIn, function(req, res) {
-	twitter.get('statuses/home_timeline', {screen_name: 'nodejs', count: 5}, function(error, tweets, response) {
+	twitter.get('statuses/home_timeline', {screen_name: 'nodejs', count: 6}, function(error, tweets, response) {
 		if(!error) {
-			res.render('twitter', {title: 'Express', tweets: tweets});
-			console.log(tweets);
+			//res.render('twitter', {title: 'Express', tweets: tweets});
+			db.user.findOne({
+				where: {id: req.user.id}
+			}).then(function(user) {
+				db.preference.findOrCreate({
+					where: {userId: req.user.id}
+				}).spread(function(preference, created){
+					console.log(created)
+					console.log(preference)
+					res.render('twitter', {title: 'Express', tweets: tweets, user: user, preference: preference});
+				})
+			})
+
 		} else {
 			res.status(500).json({error: error});
 		}
