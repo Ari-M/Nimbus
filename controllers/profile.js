@@ -14,8 +14,35 @@ var twitter = new Twitter({
 })
 
 router.get('/', isLoggedIn, function(req, res) {
-  res.render('dashboard');
-});
+	db.preference.findOne({
+		where: {userId: req.user.id}
+	}).then(function(preference) {
+		console.log(user)
+		res.render('dashboard', {preference: preference})
+	})
+})
+
+router.post('/dashboard', isLoggedIn, function(req, res) {
+	var email = req.user.email;
+	var navColor = req.body.navColor;
+	console.log(navColor);
+	db.user.findOne({
+		where: {email: email}
+	}).then(function(user) {
+		console.log(email);
+		db.preference.findOrCreate({
+			where: {userId: req.user.id}
+		}).spread(function(preference, created){
+			author.createPreference({
+				navColor: navColor
+			}).then(function(preference) {
+				console.log(preference);
+				res.redirect('/');  
+			})
+		})
+	})
+
+})
 
 router.get('/facebook', isLoggedIn, function(req, res) {
 	res.render('facebook');

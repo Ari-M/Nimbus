@@ -1,9 +1,34 @@
 <%- include partials/profile %>
 
 <h3>Customize your HUB Account</h3>
-<h5>Change Background Color</h5>
-<a href="">Red</a>
-<a href="">Yellow</a>
-<a href="">Green</a>
-<hr>
 <h5>Change Navigation Bar Color</h5>
+<!-- h5>Change Navigation Br color</h5>
+	<a href="">Peach</a>
+	<a href="">Grey</a>
+	<a href="">Purple</a> -->
+	<form method='POST' action='/profile/dashboard/'>
+		<input type='radio' id='nav-peach' name='navColor' value='#ffa577'>
+		<label for='nav-peach'>Peach</label>
+		<input type='radio' id='nav-grey' name='navColor' value='#c4c4c4'>
+		<label for='nav-grey'>Grey</label>
+		<input type='radio' id='nav-purple' name='navColor' valuel='#663399'>
+		<label for='nav-purple'>Purple</label> <br>
+		<button type='Submit'>Save</button>
+	</form>
+
+<hr>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+	console.log(<% preference %>);
+	var navBar = $('#services-menu');
+	var dashboardPage = $('#dashboard-page');
+
+	var navColor = '<%=preference.dataValues.navColor%>';	
+	if (navColor) {
+		$(navBar).css('backgroundColor', navColor);
+	} else {
+		//Do Nothing
+	}
+
+</script>

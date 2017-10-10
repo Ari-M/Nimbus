@@ -20,13 +20,9 @@
 	var navBar = $('#services-menu');
 	var twitterPage = $('#twitter-page');
 
-	//var twitterColor = preference.dataValues.twitterColor
-	var navColor = '<%=preference.dataValues.navColor%>'
-	var twitterColor = '<%=preference.dataValues.twitterColor%>'
-	
-	if (navColor || ) {
+	var navColor = '<%=preference.dataValues.navColor%>';	
+	if (navColor) {
 		$(navBar).css('backgroundColor', navColor);
-		$(twitterPage).css('backgroundColor', twitterColor)
 	} else {
 		//Do Nothing
 	}
