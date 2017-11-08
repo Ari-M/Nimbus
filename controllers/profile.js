@@ -12,17 +12,19 @@ var twitter = new Twitter({
 	access_token_key: '344317888-SugC9OFN9oScXTFGyvszwSmwUwXbAoVNQGoydTlf',
 	access_token_secret: 'onLIVSGl6isHJQ0CIcyReg3uhA5QeFygK9Q8jMF8IFW8f'
 })
-
+/* FOR THE DASHBOARD / GENERAL CUSTOMIZATION */
 router.get('/', isLoggedIn, function(req, res) {
-	db.preference.findOne({
+	db.preference.findOrCreate({
 		where: {userId: req.user.id}
-	}).then(function(preference) {
+	}).spread(function(preference, created) {
 		console.log(preference)
 		res.render('dashboard', {preference: preference})
 	})
 })
 
-router.post('/', isLoggedIn, function(req, res) {
+// Add a put route to help useres see in place the color for the nav bar
+
+router.post('/nav-color', isLoggedIn, function(req, res) {
 	var email = req.user.email;
 	var navColor = req.body.navColor;
 	console.log(navColor);
@@ -46,6 +48,17 @@ router.post('/', isLoggedIn, function(req, res) {
 
 })
 
+router.delete('/navcolor', isLoggedIn, function(req, res) {
+	console.log(req.user.id)
+	db.preference.destroy({
+		where: {userId: req.user.id}
+	}).then(function() {
+		res.redirect('/profile')
+	})
+})
+/* END */
+
+/* FOR THE FACEBOOK VIEW / NOT CURRENTLY DEVELOPED DUE TO ISSUES WITH API */
 router.get('/facebook', isLoggedIn, function(req, res) {
 	db.preference.findOne({
 		where: {userId: req.user.id}
@@ -54,14 +67,16 @@ router.get('/facebook', isLoggedIn, function(req, res) {
 		res.render('facebook', {preference: preference})
 	})
 })
+/* END */
 
+/* TWITTER ROUTES / CURRENTLY BEING DEVELOPED */
 router.get('/twitter', isLoggedIn, function(req, res) {
 	twitter.get('statuses/home_timeline', {screen_name: 'nodejs', count: 10}, function(error, tweets, response) {
 		if(!error) {
-			//res.render('twitter', {title: 'Express', tweets: tweets});
 			db.user.findOne({
 				where: {email: req.user.email}
 			}).then(function(user) {
+				console.log(tweets)
 				db.preference.findOrCreate({
 					where: {userId: req.user.id}
 				}).spread(function(preference, created){
@@ -77,7 +92,5 @@ router.get('/twitter', isLoggedIn, function(req, res) {
 	})
 
 })
-
-
-
+/* END */
 module.exports = router;

@@ -78,14 +78,8 @@ console.log(<% preference %>);
   var twitterPage = $('#twitter-page');
 
   if('<%=preference.dataValues.navColor%>') {
-    var navColor = '<%=preference.dataValues.navColor %>'
-  } else {
-    $(navBar).css('backgroundColor', 'black');
-  }
-  if (navColor) {
+    var navColor = '<%=preference.dataValues.navColor %>'        
     $(navBar).css('backgroundColor', navColor);
-  } else {
-    //Do Nothing
   }
 
 </script>

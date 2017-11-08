@@ -2,11 +2,8 @@
 
 <h3>Customize your HUB Account</h3>
 <h5>Change Navigation Bar Color</h5>
-<!-- h5>Change Navigation Br color</h5>
-	<a href="">Peach</a>
-	<a href="">Grey</a>
-	<a href="">Purple</a> -->
-	<form method='POST' action='/profile/'>
+
+	<form method='POST' action='/profile/nav-color'>
 		<input type='radio' id='nav-peach' name='navColor' value='#ffa577'>
 		<label for='nav-peach'>Peach</label>
 		<input type='radio' id='nav-grey' name='navColor' value='#c4c4c4'>
@@ -17,6 +14,13 @@
 		<label for='nav-green'>Green</label> <br>
 		<button type='Submit'>Save</button>
 	</form>
+	<hr>
+
+	<!-- WORK ON THIS, NEED TO RESET PREFERENCES COMPLETELY, USE SOME AJAX THING -->
+	<div id='customize-reset'>
+		<h5>Reset All Preferences</h5>
+		<button id='reset' type='button'>Reset</button>
+	</div>
 
 <hr>
 
@@ -26,13 +30,17 @@
 
 	if('<%=preference.dataValues.navColor%>') {
 		var navColor = '<%=preference.dataValues.navColor %>'
-	} else {
-		$(navBar).css('backgroundColor', 'black');
-	}
-	if (navColor) {
 		$(navBar).css('backgroundColor', navColor);
-	} else {
-		//Do Nothing
-	}
+	 } 
+	// FOR THE AJAX CALL TO DELETE
+	$('#reset').on('click', function(e) {
+		e.preventDefault();
+		$.ajax({
+		    url: '/profile/navcolor',
+		    type: 'DELETE',
+		});
+ 		window.location = '/profile'
+ 	})
+ 
 
 </script>

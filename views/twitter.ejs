@@ -21,13 +21,7 @@
 
 	if('<%=preference.dataValues.navColor%>') {
 		var navColor = '<%=preference.dataValues.navColor %>'
-	} else {
-		$(navBar).css('backgroundColor', 'black');
-	}
-	if (navColor) {
 		$(navBar).css('backgroundColor', navColor);
-	} else {
-		//Do Nothing
 	}
 
 </script>
