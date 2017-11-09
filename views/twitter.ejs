@@ -2,10 +2,21 @@
 <div id='twitter-page' class='background-customize'>
 	<div id='twitter-home-feed'>
 	<h3>Twitter Home Feed</h3>
+	<div id='post-tweet-container'>
+		<h4>Tweet</h4>
+		<textarea></textarea>
+		<button type='button' id='post-tweet'>Tweet</button>
+	</div>
 	<% tweets.forEach (function(tweets) { %>
 			<li class=no-bullet>
-				<div class='tweet-container'> 
-					<%= tweets.text %> - <strong> <%= tweets.user.name %> (@<%= tweets.user.screen_name %>)</strong>
+				<div class='tweet-container'>
+					<div class='twitter-user'>
+						<img class='img-circle' src='<%= tweets.user.profile_image_url %>'>
+					</div>
+					<%= tweets.text %> - <strong> <%= tweets.user.name %> (@<%= tweets.user.screen_name %>)</strong> 
+					<% if(tweets.user.location) { %>
+						from <%= tweets.user.location %>
+					<% } %>
 				</div>
 			</li>
 

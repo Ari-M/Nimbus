@@ -22,31 +22,19 @@ router.get('/', isLoggedIn, function(req, res) {
 	})
 })
 
-// Add a put route to help useres see in place the color for the nav bar
+// Add a put route to help users see in place the color for the nav bar
 
 router.post('/nav-color', isLoggedIn, function(req, res) {
-	var email = req.user.email;
-	var navColor = req.body.navColor;
-	console.log(navColor);
-	db.user.findOne({
-		where: {email: email}
-	}).then(function(user) {
-		console.log(email);
-		db.preference.findOrCreate({
-			where: {userId: req.user.id}
-		}).spread(function(preference, created){
-			db.preference.update({
-				navColor: navColor
-			}, {
-				where: {userId: req.user.id}
-			}).then(function(preference) {
-				console.log(preference);
-				res.redirect('/profile');  
-			})
-		})
+	var navColor = req.body.navColor
+	db.preference.update({
+		navColor: navColor
+	}, {
+		where: {userId: req.user.id}
+	}).then(function(preference) {
+		res.redirect('/profile')
 	})
-
 })
+	
 
 router.delete('/navcolor', isLoggedIn, function(req, res) {
 	console.log(req.user.id)
