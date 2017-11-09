@@ -18,8 +18,9 @@ router.get('/', isLoggedIn, function(req, res) {
 		where: {userId: req.user.id}
 	}).spread(function(preference, created) {
 		console.log(preference)
-		res.render('dashboard', {preference: preference})
+		res.render('dashboard', {preference: preference, user: req.user})
 	})
+	console.log(req.user)
 })
 
 // Add a put route to help users see in place the color for the nav bar
@@ -52,7 +53,7 @@ router.get('/facebook', isLoggedIn, function(req, res) {
 		where: {userId: req.user.id}
 	}).then(function(preference) {
 		console.log(preference)
-		res.render('facebook', {preference: preference})
+		res.render('facebook', {preference: preference, user: req.user})
 	})
 })
 /* END */

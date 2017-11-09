@@ -1,4 +1,4 @@
-var navBar = $('#services-menu');
+	var navBar = $('#services-menu');
 
 	if('<%=preference.dataValues.navColor%>') {
 		var navColor = '<%=preference.dataValues.navColor %>'

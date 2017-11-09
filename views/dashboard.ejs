@@ -25,4 +25,21 @@
 <hr>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script type='text/javascript' src='../public/js/dashboard.js'></script>
+<script>
+
+	if('<%=preference.dataValues.navColor%>') {
+		var navColor = '<%=preference.dataValues.navColor %>'
+		document.getElementById('services-menu').style.backgroundColor = navColor
+	 } 
+	// FOR THE AJAX CALL TO DELETE
+	$('#reset').on('click', function(e) {
+		e.preventDefault();
+		$.ajax({
+		    url: '/profile/navcolor',
+		    type: 'DELETE',
+		});
+ 		window.location = '/profile'
+ 	})
+ 
+
+</script>
