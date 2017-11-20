@@ -5,6 +5,27 @@ html,body {
   width: 90%;
   height: 100%;
  }
+
+
+
+ .header {
+    display: inline-block;
+ }
+
+.logo-link {
+  margin-left: 2%;
+  margin-right: 75%;
+  text-decoration: none;
+  border: 1px black solid;
+  font-size: 20px;
+  padding: 5px;
+  color: black;
+
+}
+
+.welcome-greeting {
+  text-align: right;
+}
 /* THIS IS CUSTOMIZABLE CSS FOR PREFERENCES TABLE */
 .background-customize {
 
