@@ -50,6 +50,11 @@ router.get('/weather', isLoggedIn, function(req, res) {
 	res.render('weather', {user: req.user})
 })
 
+	//THIS ROUTE IS ACTUALLY EXCUTED FROM THE RESULTS PAGE OF THE SEARCH-WEATHER ROUTE
+router.post('/weather', isLoggedIn, function(req, res) {
+	console.log(req.body.url);
+})
+
 router.get('/search-weather', isLoggedIn, function(req, res) {
 	res.render('search-weather', {user: req.user});
 })
