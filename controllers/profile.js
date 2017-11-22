@@ -52,7 +52,20 @@ router.get('/weather', isLoggedIn, function(req, res) {
 
 	//THIS ROUTE IS ACTUALLY EXCUTED FROM THE RESULTS PAGE OF THE SEARCH-WEATHER ROUTE
 router.post('/weather', isLoggedIn, function(req, res) {
-	console.log(req.body.url);
+	db.weather.findOrCreate({
+	  where: {
+	    userId: req.user.id,
+	    url: req.body.url
+	  },
+	  defaults: { url: req.body.url }
+	}).spread(function(weather, created) {
+	  console.log(weather);
+	  db.preference.find({
+	  	where: {userId: req.user.id}
+	  }).then(function(preference) {
+	  	res.redirect('/profile/weather');
+	  })
+	});
 })
 
 router.get('/search-weather', isLoggedIn, function(req, res) {
