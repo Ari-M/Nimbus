@@ -12,3 +12,10 @@
 </form>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+
+	if('<%=preference.dataValues.navColor%>') {
+		var navColor = '<%=preference.dataValues.navColor %>'
+		document.getElementById('services-menu').style.backgroundColor = navColor
+	 } 
+</script>

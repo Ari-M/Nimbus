@@ -47,7 +47,15 @@ router.delete('/navcolor', isLoggedIn, function(req, res) {
 // WEATHER ROUTES
 
 router.get('/weather', isLoggedIn, function(req, res) {
-	res.render('weather', {user: req.user})
+	db.weather.findAll({
+		where: {userId: req.user.id}
+	}).then(function(results) {
+		db.preference.find({
+			where: {userId: req.user.id}
+		}).then(function(preference) {
+			res.render('weather', {results: results, user: req.user, preference: preference})
+		})
+	})
 })
 
 	//THIS ROUTE IS ACTUALLY EXCUTED FROM THE RESULTS PAGE OF THE SEARCH-WEATHER ROUTE
@@ -69,7 +77,11 @@ router.post('/weather', isLoggedIn, function(req, res) {
 })
 
 router.get('/search-weather', isLoggedIn, function(req, res) {
-	res.render('search-weather', {user: req.user});
+	db.preference.find({
+		where: {userId: req.user.id}
+	}).then(function(preference) {
+		res.render('search-weather', {user: req.user, preference, preference})
+	})
 })
 
 	//THIS ROUTE IS USED TO ACTUALLY SEARCH AND GIVE A RESPONSE TO LOCATION
