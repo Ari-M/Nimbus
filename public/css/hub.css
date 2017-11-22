@@ -58,28 +58,23 @@ html,body {
   display: inline-block;
 }
 
-/* FOR FACEBOOK PAGE  */
+/* END */
 
-#login-buttons {
- display: block;
- padding-top: 10px;
+/* THIS IS FOR THE RESULTS PAGE */
+
+.main {
+  border: 1px black solid;
 }
 
-#fb-login {
-  display:;
+.location {
+  margin-right: 5%;
 }
 
-/* FOR TWITTER PAGE  */
-
-
-
-.tweet-container {
-  border: 2px black solid;
-  margin-top: 5px;
+.location, .icon {
+  display: inline-block;
 }
 
-/*   THIS IS FOR THE PROFILE PAGE.   */
-
+/*   THIS IS FOR THE PROFILE PARTIAL.   */
 
 #services-menu {
   text-align: right;

@@ -3,15 +3,12 @@ var db = require('../models');
 var isLoggedIn = require('../middleware/isLoggedIn');
 var ejsLayouts = require('express-ejs-layouts');
 var passport = require('../config/ppConfig');
-var Twitter = require('twitter');
+var request = require('request');
 var router = express.Router();
+var key = process.env.API_KEY;
+var bodyParser = require('body-parser')
 
-var twitter = new Twitter({
-	consumer_key: process.env.TWITTER_CONSUMER_KEY,
-	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-	access_token_key: '344317888-SugC9OFN9oScXTFGyvszwSmwUwXbAoVNQGoydTlf',
-	access_token_secret: 'onLIVSGl6isHJQ0CIcyReg3uhA5QeFygK9Q8jMF8IFW8f'
-})
+
 /* FOR THE DASHBOARD / GENERAL CUSTOMIZATION */
 router.get('/', isLoggedIn, function(req, res) {
 	db.preference.findOrCreate({
@@ -47,39 +44,33 @@ router.delete('/navcolor', isLoggedIn, function(req, res) {
 })
 /* END */
 
-/* FOR THE FACEBOOK VIEW / NOT CURRENTLY DEVELOPED DUE TO ISSUES WITH API */
-router.get('/facebook', isLoggedIn, function(req, res) {
-	db.preference.findOne({
-		where: {userId: req.user.id}
-	}).then(function(preference) {
-		console.log(preference)
-		res.render('facebook', {preference: preference, user: req.user})
-	})
+// WEATHER ROUTES
+
+router.get('/weather', isLoggedIn, function(req, res) {
+	res.render('weather', {user: req.user})
 })
-/* END */
 
-/* TWITTER ROUTES / CURRENTLY BEING DEVELOPED */
-router.get('/twitter', isLoggedIn, function(req, res) {
-	twitter.get('statuses/home_timeline', {screen_name: 'nodejs', count: 10}, function(error, tweets, response) {
-		if(!error) {
-			db.user.findOne({
-				where: {email: req.user.email}
-			}).then(function(user) {
-				console.log(tweets)
-				db.preference.findOrCreate({
-					where: {userId: req.user.id}
-				}).spread(function(preference, created){
-					console.log(created)
-					console.log(preference)
-					res.render('twitter', {title: 'Express', tweets: tweets, user: user, preference: preference});
-				})
-			})
+router.get('/search-weather', isLoggedIn, function(req, res) {
+	res.render('search-weather', {user: req.user});
+})
 
+	//THIS ROUTE IS USED TO ACTUALLY SEARCH AND GIVE A RESPONSE TO LOCATION
+router.post('/search-weather', isLoggedIn, function(req, res) {
+	var city = req.body.city;
+	var state = req.body.state;
+	var url = 'http://api.wunderground.com/api/' + key + '/conditions/q/' + state + '/' + city + '.json';
+	request(url, function(error, response, body) {
+		if(error) {
+			console.log(error);
 		} else {
-			res.status(500).json({error: error});
+			var weather = JSON.parse(body);
+			res.render('results', {weather: weather, user: req.user, url: url});
 		}
-	})
-
+	});
 })
-/* END */
+
+
+
+
+
 module.exports = router;

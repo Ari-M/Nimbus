@@ -1,0 +1,14 @@
+<%- include partials/profile %>
+
+<h3>Search Weather</h3>
+
+<p>You can search weather from around the U.S. Simply enter in a city and state below and we'll get you real time weather in that location.</p>
+
+
+<form id='weather-search' method='POST' action='/profile/search-weather'>
+	<input type='text' name='city' placeholder="City">
+	<input type='text' name='state' placeholder='ST'>
+	<button type='submit' id='search' type='button'>Search</button>
+</form>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
