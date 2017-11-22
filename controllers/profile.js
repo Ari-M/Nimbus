@@ -53,7 +53,20 @@ router.get('/weather', isLoggedIn, function(req, res) {
 		db.preference.find({
 			where: {userId: req.user.id}
 		}).then(function(preference) {
-			res.render('weather', {results: results, user: req.user, preference: preference})
+			var locations = [];
+			// ITERATOR TO GO THROUGH ALL THE RESULTS IN THE DB AND MAKE API REQUEST
+			for (var i = 0; i < results.length; i++) {
+				console.log(results[i].url)
+				request(results[i].url, function(error, response, body) {
+					if(error) {
+						console.log(error);
+					} else {
+						var weather = JSON.parse(body);
+						locations.push(weather)
+					}
+				});
+			}
+			res.render('weather', {results: locations, user: req.user, preference: preference})
 		})
 	})
 })
