@@ -30,7 +30,7 @@ router.delete('/', isLoggedIn, function(req, res) {
 			db.user.destroy({
 				where: {id: req.user.id}
 			}).then(function() {
-				
+
 			})
 		})
 	})
@@ -90,23 +90,22 @@ router.get('/weather', isLoggedIn, function(req, res) {
 					where: {userId: req.user.id}
 				}).then(function(preference) {
 					res.render('weather', {weather: weather, user: req.user, preference: preference});
-
 				})
 			}
 		});
-	})
+	}).catch(function (err) {
+	  res.redirect('/profile/search-weather');
+	});
 })
 
 	//THIS ROUTE IS ACTUALLY EXCUTED FROM THE RESULTS PAGE OF THE SEARCH-WEATHER ROUTE
 router.post('/weather', isLoggedIn, function(req, res) {
-	db.weather.findOrCreate({
-	  where: {
-	    userId: req.user.id,
-	  },
-	  defaults: { url: req.body.url }
-	}).spread(function(weather, created) {
-      res.redirect('/profile/weather');
-	});
+	db.weather.create({
+		url: req.body.url,
+		userId: req.user.id
+	}).then(function(data) {
+		res.redirect('/profile/weather');
+	})
 })
 
 router.get('/search-weather', isLoggedIn, function(req, res) {
