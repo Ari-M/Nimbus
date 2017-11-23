@@ -4,6 +4,8 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 var ejsLayouts = require('express-ejs-layouts');
 var passport = require('../config/ppConfig');
 var request = require('request');
+var axios = require('axios');
+var async = require('async');
 var router = express.Router();
 var key = process.env.API_KEY;
 var bodyParser = require('body-parser')
@@ -14,13 +16,38 @@ router.get('/', isLoggedIn, function(req, res) {
 	db.preference.findOrCreate({
 		where: {userId: req.user.id}
 	}).spread(function(preference, created) {
-		console.log(preference)
 		res.render('dashboard', {preference: preference, user: req.user})
 	})
-	console.log(req.user)
 })
 
-// Add a put route to help users see in place the color for the nav bar
+router.delete('/', isLoggedIn, function(req, res) {
+	db.weather.destroy({
+		where:  {userId: req.user.id}
+	}).then(function() {
+		db.preference.destroy({
+			where: {userId: req.user.id}
+		}).then(function() {
+			db.user.destroy({
+				where: {id: req.user.id}
+			}).then(function() {
+				
+			})
+		})
+	})
+})
+
+router.put('/name', isLoggedIn, function(req, res) {
+	console.log(req.body);
+	db.user.update({
+	  name: req.body.accountName
+	}, {
+	  where: {
+	    id: req.user.id
+	  }
+	}).then(function(user) {
+
+	});
+})
 
 router.post('/nav-color', isLoggedIn, function(req, res) {
 	var navColor = req.body.navColor
@@ -47,27 +74,26 @@ router.delete('/navcolor', isLoggedIn, function(req, res) {
 // WEATHER ROUTES
 
 router.get('/weather', isLoggedIn, function(req, res) {
-	db.weather.findAll({
+	// NOTE: ORIGINALLY THE INTENT WAS TO GRAB MUTLIPLE LOCATIONS HOWEVER DUE TO TIME CONSTRAINTS
+	// AND AN ASYNC REQUEST PROBLEM I AM NOT ABLE TO GRAB EVERY OBJECT BACK SO I AM ONLY LIMITED TO ONE LOCATION
+	db.weather.find({
 		where: {userId: req.user.id}
-	}).then(function(results) {
-		db.preference.find({
-			where: {userId: req.user.id}
-		}).then(function(preference) {
-			var locations = [];
-			// ITERATOR TO GO THROUGH ALL THE RESULTS IN THE DB AND MAKE API REQUEST
-			for (var i = 0; i < results.length; i++) {
-				console.log(results[i].url)
-				request(results[i].url, function(error, response, body) {
-					if(error) {
-						console.log(error);
-					} else {
-						var weather = JSON.parse(body);
-						locations.push(weather)
-					}
-				});
+	}).then(function(result) {
+		console.log(result.dataValues.url)
+		var url = result.dataValues.url
+		request(url, function(error, response, body) {
+			if(error) {
+				console.log(error);
+			} else {
+				var weather = JSON.parse(body);
+				db.preference.find({
+					where: {userId: req.user.id}
+				}).then(function(preference) {
+					res.render('weather', {weather: weather, user: req.user, preference: preference});
+
+				})
 			}
-			res.render('weather', {results: locations, user: req.user, preference: preference})
-		})
+		});
 	})
 })
 
@@ -76,16 +102,10 @@ router.post('/weather', isLoggedIn, function(req, res) {
 	db.weather.findOrCreate({
 	  where: {
 	    userId: req.user.id,
-	    url: req.body.url
 	  },
 	  defaults: { url: req.body.url }
 	}).spread(function(weather, created) {
-	  console.log(weather);
-	  db.preference.find({
-	  	where: {userId: req.user.id}
-	  }).then(function(preference) {
-	  	res.redirect('/profile/weather');
-	  })
+      res.redirect('/profile/weather');
 	});
 })
 
@@ -107,7 +127,11 @@ router.post('/search-weather', isLoggedIn, function(req, res) {
 			console.log(error);
 		} else {
 			var weather = JSON.parse(body);
-			res.render('results', {weather: weather, user: req.user, url: url});
+			db.preference.find({
+				where: {userId: req.user.id}
+			}).then(function(preference) {
+				res.render('results', {user: req.user, preference, preference, url: url, weather: weather})
+			})
 		}
 	});
 })

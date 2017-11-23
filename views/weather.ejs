@@ -1,6 +1,39 @@
 <%- include partials/profile %>
 
-<h3>Your Weather</h3>
+<div id='container weather-header'>
+	<h3>Home Weather</h3>
+	<hr>
+</div>
+
+	
+<div class="container main">
+	<h4 class='location'> <%=weather.current_observation.display_location.full %> </h4>
+	<img class='icon' src=<%=weather.current_observation.icon_url %> >
+  	<div class="row">
+    	<div class="col-sm-4">
+    		<strong><%=weather.current_observation.weather %></strong>
+			<p>Recorded at: <%=weather.current_observation.observation_location.full %></p>
+			<p><%=weather.current_observation.observation_time %></p>
+			<ul>
+				<li>Relative Humidity is at <%=weather.current_observation.relative_humidity %></li>
+				<li>Temperature is at <%=weather.current_observation.temperature_string %></li>
+				<li>Wind: <%=weather.current_observation.wind_string %></li>
+				<li>Feels like <%=weather.current_observation.feelslike_string %></li>
+			</ul>
+    	</div>
+    	<div class="col-sm-4">
+    		<ul>
+				<li>Dewpoint is at <%=weather.current_observation.dewpoint_string %></li>
+				<li>Visibility: <%=weather.current_observation.visibility_mi %> mi (<%=weather.current_observation.visibility_km %> km)</li>
+			</ul>
+    	</div>
+    	<div class="col-sm-4">
+    		<form class='location-url' method='POST' action='/profile/weather'>
+    			<button type='SUBMIT' name='url'>EDIT YOUR HOME LOCATION</button>
+    		</form>
+    	</div>
+ 	 </div>
+</div>
 
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>

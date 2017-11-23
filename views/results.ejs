@@ -34,4 +34,10 @@
   </div>
 </div>
 
+<script>
+	if('<%=preference.dataValues.navColor%>') {
+		var navColor = '<%=preference.dataValues.navColor %>'
+		document.getElementById('services-menu').style.backgroundColor = navColor
+	 } 
+</script>
 

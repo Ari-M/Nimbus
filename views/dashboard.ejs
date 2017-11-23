@@ -16,13 +16,25 @@
 	</form>
 	<hr>
 
-	<!-- WORK ON THIS, NEED TO RESET PREFERENCES COMPLETELY, USE SOME AJAX THING -->
 	<div id='customize-reset'>
 		<h5>Reset All Preferences</h5>
 		<button id='reset' type='button'>Reset</button>
 	</div>
 
 <hr>
+
+<h5>Change your Account Information</h5>
+	<form id='name-put-form' action='/profile/name'>
+		<h5>Change Name</h5>
+		<input type='text' name='accountName'>
+		<input type='SUBMIT' value='Save Changes'>
+	</form>
+<hr>
+
+<h5>Delete Your Account</h5>
+	<button id='delete-account' type='button'>Delete Account</button>
+<br>
+
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script>
@@ -36,10 +48,34 @@
 		e.preventDefault();
 		$.ajax({
 		    url: '/profile/navcolor',
-		    type: 'DELETE',
+		    method: 'DELETE'
 		});
- 		window.location = '/profile'
+ 		window.location = '/profile/'
  	})
+
+ 	// FOR THE AJAX CALL TO UPDATE NAME
+ 	$('#name-put-form').on('submit', function(e) {
+	  e.preventDefault();
+	  var nameElement = $(this);
+	  var url = nameElement.attr('action');
+	  var data = nameElement.serialize();
+	  $.ajax({
+	    method: 'PUT',
+	    url: url,
+	    data: data
+	  })
+	  alert('Name Changed Sucessfully!');
+	  window.location.reload(true);
+	});
+
+	$('#delete-account').on('click', function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/profile/',
+			method: 'DELETE'
+		});
+		window.location = '/';
+	})
  
 
 </script>
