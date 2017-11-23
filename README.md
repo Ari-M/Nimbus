@@ -1,27 +1,8 @@
-# Express Authentication
+# WeatherHUB
+Weather Application for Project Two of GA-SEA WDI-15
 
-Express authentication template using Passport + flash messages + custom middleware
+[GitHub](https://github.com/Ari-M/hub) | [Live](https://thehubproject.herokuapp.com/) | [Tracker](https://docs.google.com/document/d/1cmicimhiACpX1AmQS5espdeHkPntn1rgG6TbY0-MVu8/edit?usp=sharing)
 
-## Getting Started
+## Original Idea
 
-#### Scaffold w/tests (see `master` branch)
-
-* Run `npm install` to install dependencies
-  * Use `npm run lint:js` to lint your JS
-  * Use `npm run lint:css` to lint your CSS
-  * Use `npm test` to run tests
-* Setup the databases
-  * Change the database names in `config/config.json` to reflect your project
-  * Run `createdb project_name_development` to create the development database
-  * Run `createdb project_name_test` to create the test database
-
-#### Finished version (see `brian-finished` branch)
-
-* Run `npm install` to install dependencies
-  * Use `npm run lint:js` to lint your JS
-  * Use `npm run lint:css` to lint your CSS
-  * Use `npm test` to run tests
-* Setup the databases
-  * Run `createdb express_auth_development` to create the development database
-  * Run `createdb express_auth_test` to create the test database
-  * Run `sequelize db:migrate` to run migrations
+If you look towards the beginning of the commit messages on the GitHub repo, you'll see that the original messages contained information pertaining towards social media, particularly using the Facebook Graph and Twitter API. The original idea for project two was a social media integration app. A website where you could see your twitter feed, facebook feed, and maybe even include a news API. 
