@@ -5,6 +5,7 @@ Weather Application for Project Two of GA-SEA WDI-15
 
 ### ISSUES / IMPORTANT STUFF
 > On deployed site there is an internal server error when you search for a city and state.
+
 Due to the way Heroku is set up, I realized that you have to be very straight forward with your methods. In development, I rendered the results of that api request in a new ejs file the moment I pressed search. The code looked like this: 
 ```javascript
 router.post('/search-weather', isLoggedIn, function(req, res) {
@@ -27,8 +28,7 @@ router.post('/search-weather', isLoggedIn, function(req, res) {
 ```
 While it worked in development, I can see how Heroku may not like this and so I will have to figure out a way to refactor that code so that it would be functional. Unfortunately, this search feature is a important part of the website and as a result, the rest of the functions involving the API do not work. 
 
-> Weather tab is stuck loading
-That is something that will be worked on soon. All it involves is a simple conditional.
+> Weather That is something that will be worked on soon. All it involves is a simple conditional.
 
 > 
 
