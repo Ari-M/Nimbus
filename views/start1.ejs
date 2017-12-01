@@ -1,0 +1,15 @@
+<%- include partials/profile %>
+
+<h3>Welcome to _WEATHER_HUB_ <%=user.name %>!</h3>
+
+<p>Looks like it's your first time here! _WEATHER_HUB_ is a new and improving site that will grow to fit you weather tracking needs! To get started, just enter your home location below press "Find Home". Once you do that, your Home page will display the weather for that location.</p>
+
+
+
+<form id='weather-search' method='POST' action='/profile'>
+	<input type='text' name='city' placeholder="City">
+	<input type='text' name='state' placeholder='ST'>
+	<button type='submit' id='search' type='button'>Find Home</button>
+</form>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>

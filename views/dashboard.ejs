@@ -3,7 +3,7 @@
 <h3>Customize your HUB Account</h3>
 <h5>Change Navigation Bar Color</h5>
 
-	<form method='POST' action='/profile/nav-color'>
+	<form method='POST' action='/profile/navcolor'>
 		<input type='radio' id='nav-peach' name='navColor' value='#ffa577'>
 		<label for='nav-peach'>Peach</label>
 		<input type='radio' id='nav-grey' name='navColor' value='#c4c4c4'>
@@ -50,7 +50,7 @@
 		    url: '/profile/navcolor',
 		    method: 'DELETE'
 		});
- 		window.location = '/profile/'
+ 		window.location = '/profile'
  	})
 
  	// FOR THE AJAX CALL TO UPDATE NAME
