@@ -26,6 +26,12 @@ html,body {
 .welcome-greeting {
   text-align: right;
 }
+
+.start {
+  background-color: #7CCD7C;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
 /* THIS IS CUSTOMIZABLE CSS FOR PREFERENCES TABLE */
 .background-customize {
 
