@@ -20,7 +20,7 @@ router.post('/signup', function(req, res) {
     // if created, success and redirect home
    	// replace the contents of this if statement with the code below
       passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/profile',
         successFlash: 'Account created and logged in'
 
       })(req, res);
