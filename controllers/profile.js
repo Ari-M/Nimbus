@@ -46,7 +46,7 @@ router.put('/name', isLoggedIn, function(req, res) {
 	    id: req.user.id
 	  }
 	}).then(function(user) {
-		res.redirect('/');
+		res.redirect('/profile');
 	});
 })
 
@@ -77,26 +77,50 @@ router.delete('/navcolor', isLoggedIn, function(req, res) {
 router.get('/weather', isLoggedIn, function(req, res) {
 	// NOTE: ORIGINALLY THE INTENT WAS TO GRAB MUTLIPLE LOCATIONS HOWEVER DUE TO TIME CONSTRAINTS
 	// AND AN ASYNC REQUEST PROBLEM I AM NOT ABLE TO GRAB EVERY OBJECT BACK SO I AM ONLY LIMITED TO ONE LOCATION
-	db.weather.find({
+	var locations = [];
+	db.weather.findAll({
 		where: {userId: req.user.id}
-	}).then(function(result) {
-		console.log(result.dataValues.url)
-		var url = result.dataValues.url
-		request(url, function(error, response, body) {
-			if(error) {
-				console.log(error);
-			} else {
-				var weather = JSON.parse(body);
-				db.preference.find({
-					where: {userId: req.user.id}
-				}).then(function(preference) {
-					res.render('weather', {weather: weather, user: req.user, preference: preference});
-				})
+	}).then(function(results) {
+		db.preference.find({
+			where: {userId: req.user.id}
+		}).then(function(preference) {
+			// ITERATOR TO GO THROUGH ALL THE RESULTS IN THE DB AND MAKE API REQUEST
+			for (var i = 0; i < results.length; i++) {
+				console.log(results[i].url)
+				request(results[i].url, function(error, response, body) {
+					if(error) {
+						console.log(error);
+					} else {
+						var weather = JSON.parse(body);
+						locations.push(weather)
+					}
+				});
 			}
-		});
-	}).catch(function (err) {
-	  res.redirect('/profile/search-weather');
-	});
+			//res.render('weather', {results: locations, user: req.user, preference: preference})
+		})
+	})
+	console.log(locations);
+
+	// db.weather.find({
+	// 	where: {userId: req.user.id}
+	// }).then(function(result) {
+	// 	console.log(result.dataValues.url)
+	// 	var url = result.dataValues.url
+	// 	request(url, function(error, response, body) {
+	// 		if(error) {
+	// 			console.log(error);
+	// 		} else {
+	// 			var weather = JSON.parse(body);
+	// 			db.preference.find({
+	// 				where: {userId: req.user.id}
+	// 			}).then(function(preference) {
+	// 				res.render('weather', {weather: weather, user: req.user, preference: preference});
+	// 			})
+	// 		}
+	// 	});
+	// }).catch(function (err) {
+	//   res.redirect('/profile/search-weather');
+	// });
 })
 
 	//THIS ROUTE IS ACTUALLY EXCUTED FROM THE RESULTS PAGE OF THE SEARCH-WEATHER ROUTE
