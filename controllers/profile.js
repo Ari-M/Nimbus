@@ -75,52 +75,37 @@ router.delete('/navcolor', isLoggedIn, function(req, res) {
 // WEATHER ROUTES
 
 router.get('/weather', isLoggedIn, function(req, res) {
-	// NOTE: ORIGINALLY THE INTENT WAS TO GRAB MUTLIPLE LOCATIONS HOWEVER DUE TO TIME CONSTRAINTS
-	// AND AN ASYNC REQUEST PROBLEM I AM NOT ABLE TO GRAB EVERY OBJECT BACK SO I AM ONLY LIMITED TO ONE LOCATION
-	var locations = [];
-	db.weather.findAll({
-		where: {userId: req.user.id}
-	}).then(function(results) {
-		db.preference.find({
-			where: {userId: req.user.id}
-		}).then(function(preference) {
-			// ITERATOR TO GO THROUGH ALL THE RESULTS IN THE DB AND MAKE API REQUEST
-			for (var i = 0; i < results.length; i++) {
-				console.log(results[i].url)
-				request(results[i].url, function(error, response, body) {
-					if(error) {
-						console.log(error);
-					} else {
-						var weather = JSON.parse(body);
-						locations.push(weather)
-					}
-				});
-			}
-			//res.render('weather', {results: locations, user: req.user, preference: preference})
-		})
-	})
-	console.log(locations);
+	/*
+		NOTE: Originally the intent of this route and the code here was to be able to find every instance of a weather entry in the
+		weather database that has the userId of the user's id and make a request to it, then I can grab the object of results
+		from the API and and push it into an array called locations. However, I encountered a problem where every time I would push to the array, 
+		it would not show up in the array. No problems would show up which was equally confusing. Even more odd, is that even though I wrote code 
+		to console.log(locations), locations would display first before the data. So I believe that that the problem is a timing issue that I 
+		would have to do some more thorough research in to make a clean fix. I have an idea where I could hardcode a limit and instead of doing
+		a loop to instead hardcode the same request function to match the number of the limit but that would be messy. So I will just stick with
+		this.
+	*/
 
-	// db.weather.find({
-	// 	where: {userId: req.user.id}
-	// }).then(function(result) {
-	// 	console.log(result.dataValues.url)
-	// 	var url = result.dataValues.url
-	// 	request(url, function(error, response, body) {
-	// 		if(error) {
-	// 			console.log(error);
-	// 		} else {
-	// 			var weather = JSON.parse(body);
-	// 			db.preference.find({
-	// 				where: {userId: req.user.id}
-	// 			}).then(function(preference) {
-	// 				res.render('weather', {weather: weather, user: req.user, preference: preference});
-	// 			})
-	// 		}
-	// 	});
-	// }).catch(function (err) {
-	//   res.redirect('/profile/search-weather');
-	// });
+	db.weather.find({
+		where: {userId: req.user.id}
+	}).then(function(result) {
+		console.log(result.dataValues.url)
+		var url = result.dataValues.url
+		request(url, function(error, response, body) {
+			if(error) {
+				console.log(error);
+			} else {
+				var weather = JSON.parse(body);
+				db.preference.find({
+					where: {userId: req.user.id}
+				}).then(function(preference) {
+					res.render('weather', {weather: weather, user: req.user, preference: preference});
+				})
+			}
+		});
+	}).catch(function (err) {
+	  res.redirect('/profile/search-weather');
+	});
 })
 
 	//THIS ROUTE IS ACTUALLY EXCUTED FROM THE RESULTS PAGE OF THE SEARCH-WEATHER ROUTE
