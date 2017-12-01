@@ -71,7 +71,7 @@
 	$('#delete-account').on('click', function(e) {
 		e.preventDefault();
 		$.ajax({
-			url: '/profile/',
+			url: '/profile/delete',
 			method: 'DELETE'
 		});
 		window.location = '/';

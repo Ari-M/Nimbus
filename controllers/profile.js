@@ -20,7 +20,8 @@ router.get('/', isLoggedIn, function(req, res) {
 	})
 })
 
-router.delete('/', isLoggedIn, function(req, res) {
+router.delete('/delete', isLoggedIn, function(req, res) {
+	// CHANGED DELETE ROUTE FROM / TO /DELETE IN THE INSTANCE TO FURTHER SPECIFY FROM A ROUTE PERSPECTIVE OF WHAT THE INTENT IS
 	db.weather.destroy({
 		where:  {userId: req.user.id}
 	}).then(function() {
@@ -45,7 +46,7 @@ router.put('/name', isLoggedIn, function(req, res) {
 	    id: req.user.id
 	  }
 	}).then(function(user) {
-
+		res.redirect('/');
 	});
 })
 

@@ -28,9 +28,9 @@ router.post('/search-weather', isLoggedIn, function(req, res) {
 ```
 While it worked in development, I can see how Heroku may not like this and so I will have to figure out a way to refactor that code so that it would be functional. Unfortunately, this search feature is a important part of the website and as a result, the rest of the functions involving the API do not work. 
 
-> Weather That is something that will be worked on soon. All it involves is a simple conditional.
+> New users being redirected to the search weather page
 
-> 
+The weather page requires you to already have a location chosen, such as your home. If you do not have a location already linked to your account you will automatically be redirected to the search page to do so, on that page it will also explain the process. This will be improved later.
 
 ## Original Idea
 
@@ -38,4 +38,8 @@ If you look towards the beginning of the commit messages on the GitHub repo, you
 
 ## MVP
 
-The MVP is a barebones weather app, although not as cool, was still intricate to put together. I kept the customization features that I already had and 
+The MVP is a barebones weather app, although not as cool, was still intricate to put together. I kept the customization features that I already had and replaced the features that I tried to use with the social media api's with the WUNDERGROUND API. As of right now (in development), the website allows you to search a location and see the real time data of the weather there. You can also choose a home location, which will be pinned to your weather tab. 
+
+## Outline
+
+### Routes
