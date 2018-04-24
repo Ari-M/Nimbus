@@ -17,6 +17,7 @@ app.use(ejsLayouts);
 app.use(express.static(__dirname + '/public'));
 app.use('/auth', express.static(__dirname + '/public'));
 app.use('/profile', express.static(__dirname + '/public'));
+app.use('/main', express.static(__dirname + '/public'));
 
 /*
  * setup the session with the following:
@@ -62,6 +63,8 @@ app.get('/', function(req, res) {
 
 app.use('/auth', require('./controllers/auth'));
 app.use('/profile', require('./controllers/profile'));
+app.use('/main', require('./controllers/main'));
+
 
 var server = app.listen(process.env.PORT || 3000);
 
