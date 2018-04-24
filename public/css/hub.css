@@ -66,7 +66,7 @@ html,body {
 
 /* END */
 
-/* THIS IS FOR THE RESULTS PAGE */
+/* RESULTS.EJS */
 
 .main {
   border: 1px black solid;
@@ -80,7 +80,7 @@ html,body {
   display: inline-block;
 }
 
-/*   THIS IS FOR THE PROFILE PARTIAL.   */
+/*   /PARTIAL/PROFILE.EJS   */
 
 #services-menu {
   text-align: right;

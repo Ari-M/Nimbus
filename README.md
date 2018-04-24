@@ -1,7 +1,7 @@
 # WeatherHUB
 Weather Application for Project Two of GA-SEA WDI-15
 
-[GitHub](https://github.com/Ari-M/hub) | [Live](https://thehubproject.herokuapp.com/) | [Tracker](https://docs.google.com/document/d/1cmicimhiACpX1AmQS5espdeHkPntn1rgG6TbY0-MVu8/edit?usp=sharing)
+[GitHub](https://github.com/Ari-M/hub) | [Live](https://thehubproject.herokuapp.com/) 
 
 ### ISSUES / IMPORTANT STUFF
 > On deployed site there is an internal server error when you search for a city and state.
