@@ -1,4 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+video {
+	position: absolute;
+	width: 100%;
+	height: auto;
+	z-index: -1;
+	left: 0;
+	background-size: cover;
+}
+
 .nav-bar {
 	width: 100%;
-	text-align: center
+	text-align: center;
+	font-size: 30px;
 }
+
+.nav-bar a {
+	padding: auto 25px;
+}
+
