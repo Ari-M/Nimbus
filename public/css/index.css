@@ -20,7 +20,7 @@ video {
 	font-size: 30px;
 }
 
-.nav-bar a {
-	padding: auto 25px;
+.nav-bar a:hover {
+	color: red;
 }
 
