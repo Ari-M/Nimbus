@@ -1,4 +1,4 @@
-# WeatherHUB
+# Connect
 Weather Application for Project Two of GA-SEA WDI-15
 
 [GitHub](https://github.com/Ari-M/hub) | [Live](https://thehubproject.herokuapp.com/) 
@@ -38,7 +38,7 @@ If you look towards the beginning of the commit messages on the GitHub repo, you
 
 ## MVP
 
-The MVP is a barebones weather app, although not as cool, was still intricate to put together. I kept the customization features that I already had and replaced the features that I tried to use with the social media api's with the WUNDERGROUND API. As of right now (in development), the website allows you to search a location and see the real time data of the weather there. You can also choose a home location, which will be pinned to your weather tab. 
+The MVP is a barebones weather app, although not as cool, was still intricate to put together. I kept the customization features that I already had and replaced the features that I tried to use with the social media api's with the WUNDERGROUND API. As of right now (in development), the website allows you to search a location and see the real time data of the weather there. You can also choose a home location, which will be pinned to your weather tab. In addition to that, other features include basic profile changes, such as changing your name, customizing the color of the navigation bar, and also completely deleting your account from the website. 
 
 ## Outline
 
