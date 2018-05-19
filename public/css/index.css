@@ -4,6 +4,8 @@
 html, body {
 	margin: 0;
 	padding: 0;
+	width: 100%;
+
 }
 video {
 	position: absolute;
@@ -12,6 +14,27 @@ video {
 	z-index: -1;
 	left: 0;
 	background-size: cover;
+}
+
+#main-header {
+	width: 100%;
+	margin: 0;
+	background: rgba(255,255,255,0.5);
+	padding: 0 20% 0 20%;
+	height: 50px;
+}
+
+
+
+
+#login {
+	margin-left: 25%;;
+	font-size: 15px;
+}
+
+.container {
+	width: 100%;
+	margin-top: 20px;
 }
 
 .nav-bar {
