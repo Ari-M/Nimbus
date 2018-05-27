@@ -5,10 +5,9 @@ html, body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-
 }
 video {
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: auto;
 	z-index: -1;
@@ -22,8 +21,13 @@ video {
 	background: rgba(255,255,255,0.5);
 	padding: 0 20% 0 20%;
 	height: 50px;
+	min-width: 1050px;
+	display: fixed;
 }
 
+.header {
+	margin: 0 auto;
+}
 
 
 
@@ -35,6 +39,7 @@ video {
 .container {
 	width: 100%;
 	margin-top: 20px;
+
 }
 
 .nav-bar {
