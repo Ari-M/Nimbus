@@ -1,8 +1,16 @@
 <link rel="stylesheet"  href="css/index.css">
-<video onloadeddata="this.play()" poster='/video/Up.jpg' playsinline loop muted>
+
+<video id='v' onloadeddata="this.play()" poster='/video/Up.jpg' playsinline loop muted>
 	<source src='/video/Up.mp4' type='video/mp4'/>
 	<source src='/video/Up.webm' type='video/webm'/>
 </video>
+<div id='overlay'>
+	<h4>Welcome to Connect!</h4>
+	<div id='login' class='login'>
+		<p>login</p>
+	</div>
+</div>
+
 <!-- <div class='container-fluid' id='main-header'>
 	<h2 class='header' id='header-logo'>Connect</h2>
 	<form class='header' id='login'>
@@ -39,7 +47,7 @@
 			<li class="menu-item"><a href="#blog">Blog</a></li>
 		  </ul>
 		</nav>
-	  </div>
+		</div>
 	</header>
 	<div class="container container-bottom">
 	<section>
@@ -75,4 +83,11 @@
 
  <script>
 	var nav = responsiveNav(".nav-collapse");
+
+	var overlay= document.getElementById('overlay');
+  var video= document.getElementById('v');
+  video.addEventListener('progress', function() {
+    var show= video.currentTime>=5 && video.currentTime<10;
+    overlay.style.visibility= show? 'visible' : 'visible';
+  }, false);
  </script>
