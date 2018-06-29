@@ -17,6 +17,11 @@
 #v {
   z-index: 1;
 }
+
+.form-control {
+ width: 75%;
+ margin: 0 auto;
+}
 /* =============================================
  *
  *   FIXED RESPONSIVE NAV
