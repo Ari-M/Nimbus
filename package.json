@@ -33,6 +33,7 @@
     "express": "^4.16.3",
     "express-ejs-layouts": "^2.4.0",
     "express-session": "^1.15.6",
+    "growl": "^1.10.0",
     "morgan": "^1.7.0",
     "node-twitter-api": "^1.8.0",
     "npm": "^5.10.0",
