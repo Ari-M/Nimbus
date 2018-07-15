@@ -1,3 +1,6 @@
+//PREVIOUS COPY OF CODE OF /PROFILE/
+
+
 var express = require('express');
 var db = require('../models');
 var isLoggedIn = require('../middleware/isLoggedIn');

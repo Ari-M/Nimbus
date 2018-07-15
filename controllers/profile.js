@@ -103,7 +103,7 @@ router.get('/settings', isLoggedIn, function(req, res) {
 })
 
 router.delete('/delete', isLoggedIn, function(req, res) {
-	// CHANGED DELETE ROUTE FROM '/' TO '/DELETE' TO FURTHER SPECIFY FROM A ROUTE PERSPECTIVE OF WHAT THE INTENT IS
+	// CHANGED DELETE ROUTE FROM '/' TO '/DELETE' TO FURTHER SPECIFY OF WHAT THE INTENT IS
 	db.weather.destroy({
 		where:  {userId: req.user.id}
 	}).then(function() {
